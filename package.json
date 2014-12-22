@@ -1,0 +1,26 @@
+{
+  "name": "incubator",
+  "version": "0.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "webpack test.js --output-file=testBundle.js --config=webpack.config.js --target=node --colors && mocha  testBundle.js",
+    "server": "webpack-dev-server"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^1.4.13"
+  },
+  "dependencies": {
+    "6to5": "^1.15.0",
+    "6to5-loader": "^0.2.4",
+    "axios": "^0.4.2",
+    "chai": "^1.10.0",
+    "json-loader": "^0.5.1",
+    "memory-cache": "0.0.5",
+    "mocha": "^2.0.1",
+    "source-map-loader": "^0.1.3",
+    "tcomb": "^0.3.6",
+    "traceur-loader": "^0.6.3"
+  }
+}
