@@ -1,4 +1,4 @@
-import { list, get, update } from './AnnotationsAPI';
+import { list, get, update } from 'app/AnnotationsAPI';
 
 
 

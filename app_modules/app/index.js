@@ -1,7 +1,7 @@
-import HttpRequestTemplate from './HttpRequestTemplate';
-import HttpClientRequest from './HttpClientRequest';
-import Api from './Api';
-import ApiResource from './ApiResource';
+import HttpRequestTemplate from 'app/HttpRequestTemplate';
+import HttpClientRequest from 'app/HttpClientRequest';
+import Api from 'app/Api';
+import ApiResource from 'app/ApiResource';
 
 console.log(new HttpRequestTemplate('PUT /api/example/:id?foo=bar&:hell').apply({
   id: 700,

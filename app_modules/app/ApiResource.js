@@ -1,4 +1,4 @@
-import Api from './Api';
+import Api from 'app/Api';
 
 export default class ApiResource {
 

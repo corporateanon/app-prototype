@@ -2,3 +2,4 @@ node_modules
 *.sublime-workspace
 testBundle.js
 testBundle.js.map
+tmp

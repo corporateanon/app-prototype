@@ -1,4 +1,4 @@
-import HttpClientRequest from './HttpClientRequest';
+import HttpClientRequest from 'app/HttpClientRequest';
 
 export default function Api(template, options = {}) {
   var client = new HttpClientRequest(template, options);

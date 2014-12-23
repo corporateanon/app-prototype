@@ -1,5 +1,5 @@
 import t from 'tcomb';
-import PromiseCache from './PromiseCache';
+import PromiseCache from 'app/PromiseCache';
 
 export default class DataSource {
   constructor(options) {
@@ -23,20 +23,27 @@ export default class DataSource {
     return pass;
   }
 
-  getList(params) {
+  getList(params = {}) {
     return this.cached(
       'getList',
       params,
 
-      (params) => this.callApi(this.apiResource.list, params)
+      () => this.callApi(this.apiResource.list, params)
       .then(this.getListDecode.bind(this))
       .then(this.assertArray.bind(this))
       .then(this.toModelList.bind(this))
     )
   }
 
-  get(params) {
-    return this.invoke(this.apiResource.item(params));
+  get(params = {}) {
+    return this.cached(
+      'get',
+      params,
+
+      () => this.callApi(this.apiResource.item, params)
+      .then(this.getItemDecode.bind(this))
+      .then(this.toModel.bind(this))
+    )
   }
 
   unwrapHttp(promise) {
@@ -51,7 +58,7 @@ export default class DataSource {
   }
 
   processHttpError(httpErrorResponse) {
-    return new Error(httpErrorResponse);
+    throw new Error(httpErrorResponse);
   }
 
   assertArray(data) {
@@ -65,8 +72,8 @@ export default class DataSource {
     return rawList.map((item) => this.model(item));
   }
 
-  toModel(rawList) {
-    return this.model(item);
+  toModel(rawItem) {
+    return this.model(rawItem);
   }
 
   cached(staticKey, dynamicKey, fn) {
@@ -75,7 +82,11 @@ export default class DataSource {
   }
 
   callApi(method, params) {
-    return method(params).then(this.processHttpResponse.bind(this), this.processHttpError.bind(this));
+    return method(params)
+      .then(
+        this.processHttpResponse.bind(this),
+        this.processHttpError.bind(this)
+      );
   }
 }
 

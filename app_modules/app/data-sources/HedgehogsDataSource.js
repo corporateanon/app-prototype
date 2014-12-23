@@ -1,6 +1,6 @@
-import Hedgehog from './Hedgehog';
-import ApiResource from '../ApiResource';
-import DataSource from '../DataSource';
+import Hedgehog from 'app/data-sources/Hedgehog';
+import ApiResource from 'app/ApiResource';
+import DataSource from 'app/DataSource';
 
 export default class HedgehogsDataSource extends DataSource {
   //get

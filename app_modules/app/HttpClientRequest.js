@@ -1,5 +1,5 @@
 import http from 'axios';
-import HttpRequestTemplate from './HttpRequestTemplate';
+import HttpRequestTemplate from 'app/HttpRequestTemplate';
 
 export default class HttpClientRequest {
   constructor(template, options = {}) {
