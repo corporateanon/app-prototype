@@ -1,5 +1,5 @@
 module.exports = {
-  entry: "app_modules/app/index.js",
+  entry: "app/index.js",
   output: {
     path: __dirname,
     filename: "bundle.js"
@@ -13,7 +13,7 @@ module.exports = {
   },
   module: {
     loaders: [{
-      test: /app(\/|\\).+\.js$/,
+      test: /app_modules(\/|\\).+\.js$/,
       loader: 'traceur',
       query: {
         runtime: true,

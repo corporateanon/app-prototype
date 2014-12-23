@@ -46,21 +46,6 @@ export default class DataSource {
     )
   }
 
-  unwrapHttp(promise) {
-    return promise.then(
-      this.processHttpResponse.bind(this),
-      this.processHttpError.bind(this)
-    );
-  }
-
-  processHttpResponse(httpErrorResponse) {
-    return httpErrorResponse.data;
-  }
-
-  processHttpError(httpErrorResponse) {
-    throw new Error(httpErrorResponse);
-  }
-
   assertArray(data) {
     if (!t.Arr.is(data)) {
       throw new TypeError('Array expected');
@@ -82,11 +67,7 @@ export default class DataSource {
   }
 
   callApi(method, params) {
-    return method(params)
-      .then(
-        this.processHttpResponse.bind(this),
-        this.processHttpError.bind(this)
-      );
+    return method(params);
   }
 }
 
