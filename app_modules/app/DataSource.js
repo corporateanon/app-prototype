@@ -10,10 +10,10 @@ export default class DataSource {
     return 60000;
   }
   get createApiResource() {
-    return abstract;
+    abstract();
   }
   get model() {
-    return abstract;
+    abstract();
   }
 
   get getListDecode() {
@@ -54,7 +54,7 @@ export default class DataSource {
   }
 
   toModelList(rawList) {
-    return rawList.map((item) => this.model(item));
+    return rawList.map((rawItem) => this.toModel(rawItem));
   }
 
   toModel(rawItem) {
@@ -62,12 +62,16 @@ export default class DataSource {
   }
 
   cached(staticKey, dynamicKey, fn) {
-    var key = `${ this.cacheNamespace }.${ staticKey }.${ JSON.stringify(dynamicKey) }`;
-    return PromiseCache(key, this.cacheTtl, fn);
+    var key = `${ staticKey }.${ JSON.stringify(dynamicKey) }`;
+    return PromiseCache(this.constructor.cache, key, this.cacheTtl, fn);
   }
 
   callApi(method, params) {
     return method(params);
+  }
+
+  static get cache() {
+    abstract();
   }
 }
 

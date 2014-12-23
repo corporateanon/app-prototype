@@ -1,6 +1,9 @@
 import Hedgehog from 'app/data-sources/Hedgehog';
 import ApiResource from 'app/ApiResource';
 import DataSource from 'app/DataSource';
+import Cache from 'app/Cache';
+
+var cache = new Cache({});
 
 export default class HedgehogsDataSource extends DataSource {
   //get
@@ -8,6 +11,10 @@ export default class HedgehogsDataSource extends DataSource {
 
   get model() {
     return Hedgehog;
+  }
+
+  static get cache() {
+    return cache;
   }
 
   createApiResource(options) {

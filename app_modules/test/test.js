@@ -61,7 +61,7 @@ function createDataSource() {
 
 describe('HedgehogsDataSource', () => {
 
-  beforeEach(() => Cache.clear());
+  beforeEach(() => HedgehogsDataSource.cache.clear());
 
 
 

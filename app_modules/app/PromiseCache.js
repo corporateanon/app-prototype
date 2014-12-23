@@ -1,7 +1,7 @@
-import Cache from 'memory-cache';
+// import Cache from 'memory-cache';
 import t from 'tcomb';
 
-export default function PromiseCache(key, ttl, fn) {
+export default function PromiseCache(cache, key, ttl, fn) {
   if (!t.Str.is(key)) {
     throw new TypeError('key');
   }
@@ -11,7 +11,7 @@ export default function PromiseCache(key, ttl, fn) {
 
   var promise = new Promise(
     function(resolve, reject) {
-      var previouslyCached = Cache.get(key);
+      var previouslyCached = cache.get(key);
 
       if (null !== previouslyCached) {
         resolve(previouslyCached);
@@ -20,7 +20,7 @@ export default function PromiseCache(key, ttl, fn) {
 
       fn().then(
         (res) => {
-          Cache.put(key, res, ttl);
+          cache.put(key, res, ttl);
           resolve(res);
         },
 
