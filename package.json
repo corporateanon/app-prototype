@@ -6,22 +6,18 @@
     "test": "webpack test/test.js --output-file=tmp/testBundle.js --config=webpack.config.js --target=node --colors && mocha tmp/testBundle.js",
     "server": "webpack-dev-server"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Corporate Anon",
+  "license": "MIT",
   "devDependencies": {
     "chai-spies": "^0.5.1",
     "webpack": "^1.4.13",
-    "6to5": "^1.15.0",
-    "6to5-loader": "^0.2.4",
     "chai": "^1.10.0",
     "json-loader": "^0.5.1",
     "mocha": "^2.0.1",
-    "source-map-loader": "^0.1.3",
     "traceur-loader": "^0.6.3"
   },
   "dependencies": {
     "tcomb": "^0.3.6",
-    "axios": "^0.4.2",
-    "memory-cache": "0.0.5"
+    "axios": "^0.4.2"
   }
 }

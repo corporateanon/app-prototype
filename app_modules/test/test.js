@@ -3,7 +3,6 @@ import spies from 'chai-spies';
 import Api from 'app/Api';
 import HedgehogsDataSource from 'app/data-sources/HedgehogsDataSource';
 import Hedgehog from 'app/data-sources/Hedgehog';
-import Cache from 'memory-cache';
 
 var {
   expect
@@ -41,7 +40,7 @@ function createDataSource() {
         name: 'bar',
       }]);
     });
-  }
+  };
 
   ds.apiResource.item = function(params) {
     return new Promise(function(resolve, reject) {
@@ -55,7 +54,7 @@ function createDataSource() {
         return item.id === params.id;
       })[0]);
     });
-  }
+  };
   return ds;
 }
 
@@ -66,7 +65,7 @@ describe('HedgehogsDataSource', () => {
 
 
   it('should call some API methods', (done) => {
-    var ds = createDataSource()
+    var ds = createDataSource();
 
     ds.getList().then((items) => {
       expect(items).to.have.deep.property('[0].name', 'foo');
@@ -96,7 +95,7 @@ describe('HedgehogsDataSource', () => {
 
 
   it('should call item() API method', (done) => {
-    var ds = createDataSource()
+    var ds = createDataSource();
 
     ds.get({
       id: 2

@@ -3,7 +3,7 @@ import ApiResource from 'app/ApiResource';
 import DataSource from 'app/DataSource';
 import Cache from 'app/Cache';
 
-var cache = new Cache({});
+var cache = new Cache();
 
 export default class HedgehogsDataSource extends DataSource {
   //get
