@@ -30,7 +30,7 @@ describe('Api', function() {
 function createDataSource() {
   var ds = new HedgehogsDataSource();
 
-  ds.apiResource.list = function() {
+  ds.api.list = function() {
     return new Promise(function(resolve, reject) {
       resolve([{
         id: 1,
@@ -42,7 +42,7 @@ function createDataSource() {
     });
   };
 
-  ds.apiResource.item = function(params) {
+  ds.api.item = function(params) {
     return new Promise(function(resolve, reject) {
       resolve([{
         id: 1,
@@ -76,7 +76,7 @@ describe('HedgehogsDataSource', () => {
   it('should call the same methods with same params once', (done) => {
     var ds = createDataSource();
 
-    ds.apiResource.list = chai.spy(ds.apiResource.list);
+    ds.api.list = chai.spy(ds.api.list);
 
     ds.getList()
       .then(() => ds.getList())
@@ -87,7 +87,7 @@ describe('HedgehogsDataSource', () => {
         foo: 'bar'
       }))
       .then((items) => {
-        expect(ds.apiResource.list).to.be.called.exactly(2);
+        expect(ds.api.list).to.be.called.exactly(2);
         done();
       })
       .catch(done);

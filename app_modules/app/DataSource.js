@@ -1,9 +1,13 @@
 import t from 'tcomb';
 import PromiseCache from 'app/PromiseCache';
+import BatchLoader from 'app/BatchLoader';
 
 export default class DataSource {
-  constructor(options) {
-    this.apiResource = this.createApiResource(options);
+  constructor(options = {}) {
+    var {
+      api
+    } = options;
+    this.api = this.createApiResource(api);
   }
 
   get cacheTtl() {
@@ -23,12 +27,18 @@ export default class DataSource {
     return pass;
   }
 
+  createBatchLoader() {
+    return new BatchLoader({
+      get: this.get.bind(this)
+    });
+  }
+
   getList(params = {}) {
     return this.cached(
       'getList',
       params,
 
-      () => this.callApi(this.apiResource.list, params)
+      () => this.callApi(this.api.list, params)
       .then(this.getListDecode.bind(this))
       .then(this.assertArray.bind(this))
       .then(this.toModelList.bind(this))
@@ -40,7 +50,7 @@ export default class DataSource {
       'get',
       params,
 
-      () => this.callApi(this.apiResource.item, params)
+      () => this.callApi(this.api.item, params)
       .then(this.getItemDecode.bind(this))
       .then(this.toModel.bind(this))
     )
