@@ -1,7 +1,8 @@
-import Hedgehog from 'app/data-sources/Hedgehog';
 import ApiResource from 'app/ApiResource';
 import DataSource from 'app/DataSource';
 import Cache from 'app/Cache';
+
+import Hedgehog from './Hedgehog';
 
 var cache = new Cache();
 

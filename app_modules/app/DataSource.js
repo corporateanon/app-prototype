@@ -27,9 +27,15 @@ export default class DataSource {
     return pass;
   }
 
+  get batchLoader() {
+    return this._batchLoader || (this._batchLoader = this.createBatchLoader());
+  }
+
   createBatchLoader() {
     return new BatchLoader({
-      get: this.get.bind(this)
+      getList: this.getList.bind(this),
+      cacheKey: this.cacheKey.bind(this),
+      cache: this.constructor.cache,
     });
   }
 
@@ -72,8 +78,12 @@ export default class DataSource {
   }
 
   cached(staticKey, dynamicKey, fn) {
-    var key = `${ staticKey }.${ JSON.stringify(dynamicKey) }`;
+    var key = this.cacheKey(staticKey, dynamicKey);
     return PromiseCache(this.constructor.cache, key, this.cacheTtl, fn);
+  }
+
+  cacheKey(staticKey, dynamicKey) {
+    return `${ staticKey }.${ JSON.stringify(dynamicKey) }`;
   }
 
   callApi(method, params) {
